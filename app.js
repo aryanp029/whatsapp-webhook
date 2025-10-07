@@ -16,7 +16,7 @@ const accessToken = process.env.ACCESS_TOKEN;
 const phoneNumberId = process.env.PHONE_NUMBER_ID;
 
 // WhatsApp Cloud API base URL
-const WHATSAPP_API_URL = `https://graph.facebook.com/v18.0/${phoneNumberId}/messages`;
+const WHATSAPP_API_URL = `https://graph.facebook.com/v23.0/${phoneNumberId}/messages`;
 
 // Function to send typing indicator
 async function sendTypingIndicator(to) {
