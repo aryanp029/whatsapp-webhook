@@ -19,17 +19,14 @@ const phoneNumberId = process.env.PHONE_NUMBER_ID;
 const WHATSAPP_API_URL = `https://graph.facebook.com/v23.0/${phoneNumberId}/messages`;
 
 // Function to send typing indicator
-async function sendTypingIndicator(to) {
+async function sendTypingIndicator(to, messageId) {
   try {
     const response = await axios.post(
       WHATSAPP_API_URL,
       {
         messaging_product: "whatsapp",
-        to: to,
-        type: "text",
-        text: {
-          body: ""
-        },
+        status: "read",
+        message_id: messageId,
         typing_indicator: {
           type: "text"
         }
@@ -78,12 +75,14 @@ async function sendMessage(to, message) {
 // Function to process incoming messages
 async function processMessage(message) {
   const from = message.from;
+  const messageId = message.id;
   const messageText = message.text?.body || '';
   
   console.log(`Received message from ${from}: ${messageText}`);
+  console.log(`Message ID: ${messageId}`);
   
-  // Send typing indicator
-  await sendTypingIndicator(from);
+  // Send typing indicator with message ID
+  await sendTypingIndicator(from, messageId);
   
   // Wait for 3 seconds (simulating typing)
   await new Promise(resolve => setTimeout(resolve, 3000));
