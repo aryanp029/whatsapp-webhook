@@ -30,8 +30,8 @@ async function sendTypingIndicator(to) {
         text: {
           body: ""
         },
-        action: {
-          type: "typing_on"
+        typing_indicator: {
+          type: "text"
         }
       },
       {
